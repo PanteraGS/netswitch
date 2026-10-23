@@ -30,6 +30,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
+            android:id="@+id/title"
             android:text="@string/widget_title"
             android:textColor="@color/widget_text_dim"
             android:textSize="12sp" />

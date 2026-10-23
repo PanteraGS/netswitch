@@ -70,7 +70,16 @@ object NetController {
     /** Переключает сеть. Бросает NetException с понятным текстом при ошибке. */
     suspend fun switchTo(context: Context, mode: NetMode): NetMode {
         val error = withContext(Dispatchers.IO) { service(context).setAllowedTypes(mode.mask) }
-        if (error != null) throw NetException(error)
+        if (error != null) {
+            throw NetException(
+                when (error) {
+                    NetService.ERR_REJECTED -> context.getString(R.string.error_rejected)
+                    NetService.ERR_NO_SIM -> context.getString(R.string.error_no_sim)
+                    NetService.ERR_NO_SERVICE -> context.getString(R.string.error_no_service)
+                    else -> error
+                },
+            )
+        }
         saveMode(context, mode)
         return refresh(context) ?: mode
     }
@@ -80,9 +89,9 @@ object NetController {
 
         withTimeoutOrNull(3000) { awaitBinder() }
         when (shizukuState(context)) {
-            ShizukuState.NOT_INSTALLED -> throw NetException("Установите Shizuku")
-            ShizukuState.NOT_RUNNING -> throw NetException("Shizuku не запущен")
-            ShizukuState.NO_PERMISSION -> throw NetException("Нет разрешения Shizuku")
+            ShizukuState.NOT_INSTALLED -> throw NetException(context.getString(R.string.error_shizuku_not_installed))
+            ShizukuState.NOT_RUNNING -> throw NetException(context.getString(R.string.error_shizuku_not_running))
+            ShizukuState.NO_PERMISSION -> throw NetException(context.getString(R.string.error_shizuku_no_permission))
             ShizukuState.READY -> Unit
         }
 

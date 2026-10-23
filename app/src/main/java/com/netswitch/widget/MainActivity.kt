@@ -1,9 +1,12 @@
 package com.netswitch.widget
 
 import android.app.Activity
+import android.app.LocaleManager
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -24,6 +27,7 @@ class MainActivity : Activity() {
     private lateinit var currentMode: TextView
     private lateinit var message: TextView
     private lateinit var modeButtons: Map<NetMode, Button>
+    private lateinit var languageButtons: Map<String, Button>
 
     private val binderListener = Shizuku.OnBinderReceivedListener { runOnUiThread { updateState() } }
     private val binderDeadListener = Shizuku.OnBinderDeadListener { runOnUiThread { updateState() } }
@@ -47,6 +51,19 @@ class MainActivity : Activity() {
         modeButtons.forEach { (mode, button) -> button.setOnClickListener { switchTo(mode) } }
         shizukuButton.setOnClickListener { onShizukuButton() }
 
+        // Язык приложения можно менять с Android 13
+        languageButtons = mapOf(
+            "" to requireViewById<Button>(R.id.lang_system),
+            "ru" to requireViewById<Button>(R.id.lang_ru),
+            "en" to requireViewById<Button>(R.id.lang_en),
+        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            languageButtons.forEach { (tag, button) -> button.setOnClickListener { setLanguage(tag) } }
+            showLanguage()
+        } else {
+            requireViewById<View>(R.id.language_card).visibility = View.GONE
+        }
+
         Shizuku.addBinderReceivedListenerSticky(binderListener)
         Shizuku.addBinderDeadListener(binderDeadListener)
         Shizuku.addRequestPermissionResultListener(permissionListener)
@@ -55,6 +72,7 @@ class MainActivity : Activity() {
     override fun onResume() {
         super.onResume()
         updateState()
+        NetWidgetProvider.updateAll(this)
     }
 
     override fun onDestroy() {
@@ -94,6 +112,19 @@ class MainActivity : Activity() {
     private fun showMode(mode: NetMode?) {
         currentMode.text = mode?.label ?: "—"
         modeButtons.forEach { (m, button) -> button.isSelected = m == mode }
+    }
+
+    private fun setLanguage(tag: String) {
+        val locales = if (tag.isEmpty()) LocaleList.getEmptyLocaleList() else LocaleList.forLanguageTags(tag)
+        getSystemService(LocaleManager::class.java).applicationLocales = locales
+        showLanguage()
+    }
+
+    private fun showLanguage() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+        val current = getSystemService(LocaleManager::class.java).applicationLocales
+        val tag = if (current.isEmpty) "" else current[0].language
+        languageButtons.forEach { (t, button) -> button.isSelected = t == tag }
     }
 
     private fun onShizukuButton() {

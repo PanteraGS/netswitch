@@ -27,10 +27,10 @@ class NetService() : INetService.Stub() {
 
     override fun setAllowedTypes(mask: Long): String? = try {
         val ok = call(telephony(), "setAllowedNetworkTypesForReason", subId(), REASON_USER, mask)
-        if (ok == false) "Система отклонила запрос" else null
+        if (ok == false) ERR_REJECTED else null
     } catch (t: Throwable) {
         val cause = (t as? java.lang.reflect.InvocationTargetException)?.targetException ?: t
-        cause.toString()
+        cause.message?.takeIf { it.startsWith("ERR_") } ?: cause.toString()
     }
 
     private fun telephony(): Any = service("phone", "com.android.internal.telephony.ITelephony")
@@ -41,14 +41,14 @@ class NetService() : INetService.Stub() {
             if (id >= 0) return id
         }
         val id = SubscriptionManager.getDefaultDataSubscriptionId()
-        require(id >= 0) { "Не найдена SIM-карта для мобильных данных" }
+        require(id >= 0) { ERR_NO_SIM }
         return id
     }
 
     private fun service(name: String, iface: String): Any {
         val binder = Class.forName("android.os.ServiceManager")
             .getMethod("getService", String::class.java)
-            .invoke(null, name) as IBinder? ?: error("Сервис $name недоступен")
+            .invoke(null, name) as IBinder? ?: error(ERR_NO_SERVICE)
         return Class.forName("$iface\$Stub")
             .getMethod("asInterface", IBinder::class.java)
             .invoke(null, binder)!!
@@ -59,7 +59,13 @@ class NetService() : INetService.Stub() {
         return method.invoke(target, *args)
     }
 
-    private companion object {
-        const val REASON_USER = 0 // TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER
+    companion object {
+        private const val REASON_USER = 0 // TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER
+
+        // Коды ошибок: сервис работает вне приложения и не видит его строк,
+        // текст на нужном языке подставляет NetController
+        const val ERR_REJECTED = "ERR_REJECTED"
+        const val ERR_NO_SIM = "ERR_NO_SIM"
+        const val ERR_NO_SERVICE = "ERR_NO_SERVICE"
     }
 }

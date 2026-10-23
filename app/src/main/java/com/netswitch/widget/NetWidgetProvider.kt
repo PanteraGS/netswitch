@@ -73,6 +73,9 @@ class NetWidgetProvider : AppWidgetProvider() {
             if (ids.isEmpty()) return
 
             val views = RemoteViews(context.packageName, R.layout.widget_net)
+            // Тексты задаём из кода: лаунчер берёт строки из layout на языке системы,
+            // а не на выбранном в приложении
+            views.setTextViewText(R.id.title, context.getString(R.string.widget_title))
             views.setTextViewText(R.id.mode_big, mode?.label ?: "—")
             views.setTextViewText(
                 R.id.status,

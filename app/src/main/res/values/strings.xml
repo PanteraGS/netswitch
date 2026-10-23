@@ -1,27 +1,37 @@
 <resources>
-    <string name="app_name">Сеть 3G/4G</string>
-    <string name="widget_name">Переключатель 3G/4G</string>
-    <string name="widget_desc">Переключение мобильной сети между 3G и 4G в одно касание</string>
-    <string name="tile_name">Сеть</string>
-    <string name="widget_title">Мобильная сеть</string>
+    <string name="app_name">Network 3G/4G</string>
+    <string name="widget_name">3G/4G switch</string>
+    <string name="widget_desc">Switch mobile network between 3G and 4G with one tap</string>
+    <string name="tile_name">Network</string>
+    <string name="widget_title">Mobile network</string>
 
-    <string name="status_active">Режим активен</string>
-    <string name="status_5g">Включён 5G</string>
-    <string name="status_unknown">Откройте приложение</string>
-    <string name="status_switching">Переключаю…</string>
-    <string name="switched_to">Готово: %1$s</string>
-    <string name="error_timeout">Shizuku не ответил. Он запущен?</string>
+    <string name="status_active">Mode active</string>
+    <string name="status_5g">5G is on</string>
+    <string name="status_unknown">Open the app</string>
+    <string name="status_switching">Switching…</string>
+    <string name="switched_to">Done: %1$s</string>
+    <string name="error_timeout">Shizuku did not respond. Is it running?</string>
 
     <string name="shizuku_title">Shizuku</string>
-    <string name="shizuku_not_installed">Не установлен. Без него Android не даёт приложениям менять тип сети.</string>
-    <string name="shizuku_not_running">Установлен, но не запущен. Откройте Shizuku и запустите его через «Беспроводную отладку».</string>
-    <string name="shizuku_no_permission">Запущен. Осталось выдать разрешение этому приложению.</string>
-    <string name="shizuku_ready">Всё готово ✓</string>
-    <string name="action_install">Скачать Shizuku</string>
-    <string name="action_open_shizuku">Открыть Shizuku</string>
-    <string name="action_grant">Выдать разрешение</string>
+    <string name="shizuku_not_installed">Not installed. Without it Android does not let apps change the network type.</string>
+    <string name="shizuku_not_running">Installed but not running. Open Shizuku and start it via “Wireless debugging”.</string>
+    <string name="shizuku_no_permission">Running. Now grant permission to this app.</string>
+    <string name="shizuku_ready">All set ✓</string>
+    <string name="action_install">Download Shizuku</string>
+    <string name="action_open_shizuku">Open Shizuku</string>
+    <string name="action_grant">Grant permission</string>
 
-    <string name="current_title">Сейчас</string>
-    <string name="howto_title">Как добавить виджет</string>
-    <string name="howto_text">Удерживайте палец на пустом месте рабочего стола → «Виджеты» → «Сеть 3G/4G».\n\nЕщё можно добавить плитку «Сеть» в шторку быстрых настроек: она переключает 3G ⇄ 4G.\n\nПосле перезагрузки телефона Shizuku нужно запускать заново (откройте Shizuku → «Запустить»).</string>
+    <string name="current_title">Now</string>
+    <string name="error_rejected">The system rejected the request</string>
+    <string name="error_no_sim">No SIM card for mobile data found</string>
+    <string name="error_no_service">Telephony service is unavailable</string>
+    <string name="error_shizuku_not_installed">Install Shizuku</string>
+    <string name="error_shizuku_not_running">Shizuku is not running</string>
+    <string name="error_shizuku_no_permission">No Shizuku permission</string>
+
+    <string name="language_title">Language</string>
+    <string name="lang_system">System</string>
+
+    <string name="howto_title">How to add the widget</string>
+    <string name="howto_text">Long-press an empty spot on the home screen → “Widgets” → “Network 3G/4G”.\n\nYou can also add the “Network” tile to Quick Settings: it switches 3G ⇄ 4G.\n\nAfter the phone restarts, Shizuku has to be started again (open Shizuku → “Start”).</string>
 </resources>
