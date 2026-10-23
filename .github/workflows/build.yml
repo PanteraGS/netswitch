@@ -23,6 +23,8 @@ jobs:
         with:
           name: NetSwitch-apk
           path: NetSwitch.apk
+      # Тег latest всегда указывает на последнюю сборку
+      - run: git tag -f latest && git push -f origin latest
       # Публичная ссылка на APK — скачивается без входа в GitHub
       - uses: softprops/action-gh-release@v2
         with:
@@ -30,3 +32,11 @@ jobs:
           name: NetSwitch APK
           files: NetSwitch.apk
           make_latest: true
+          body: |
+            Виджет для переключения мобильной сети между 3G и 4G в одно касание.
+            Widget to switch mobile network between 3G and 4G with one tap.
+
+            **Скачать / Download:** `NetSwitch.apk` ниже / below.
+
+            Для работы нужен [Shizuku](https://shizuku.rikka.app/download/). Настройка описана в [README](https://github.com/${{ github.repository }}#readme).
+            Requires [Shizuku](https://shizuku.rikka.app/download/). Setup steps are in the [README](https://github.com/${{ github.repository }}#readme).
