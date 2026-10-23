@@ -1,0 +1,14 @@
+<resources>
+    <color name="bg">#0E1024</color>
+    <color name="card">#1A1D3D</color>
+    <color name="text">#FFFFFF</color>
+    <color name="text_dim">#A9ADD6</color>
+    <color name="accent_start">#22D3EE</color>
+    <color name="accent_end">#6366F1</color>
+
+    <color name="widget_text">#FFFFFF</color>
+    <color name="widget_text_dim">#B9BDE6</color>
+    <color name="widget_error">#FCA5A5</color>
+    <color name="pill_text_on">#FFFFFF</color>
+    <color name="pill_text_off">#C7CAF0</color>
+</resources>

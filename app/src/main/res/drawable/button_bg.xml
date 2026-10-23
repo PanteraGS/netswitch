@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="100dp" />
+            <solid android:color="#0FFFFFFF" />
+        </shape>
+    </item>
+    <item android:state_selected="true" android:drawable="@drawable/pill_on" />
+    <item android:drawable="@drawable/pill_off" />
+</selector>

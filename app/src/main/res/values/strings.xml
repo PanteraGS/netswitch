@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Сеть 3G/4G</string>
+    <string name="widget_name">Переключатель 3G/4G</string>
+    <string name="widget_desc">Переключение мобильной сети между 3G и 4G в одно касание</string>
+    <string name="tile_name">Сеть</string>
+    <string name="widget_title">Мобильная сеть</string>
+
+    <string name="status_active">Режим активен</string>
+    <string name="status_5g">Включён 5G</string>
+    <string name="status_unknown">Откройте приложение</string>
+    <string name="status_switching">Переключаю…</string>
+    <string name="switched_to">Готово: %1$s</string>
+    <string name="error_timeout">Shizuku не ответил. Он запущен?</string>
+
+    <string name="shizuku_title">Shizuku</string>
+    <string name="shizuku_not_installed">Не установлен. Без него Android не даёт приложениям менять тип сети.</string>
+    <string name="shizuku_not_running">Установлен, но не запущен. Откройте Shizuku и запустите его через «Беспроводную отладку».</string>
+    <string name="shizuku_no_permission">Запущен. Осталось выдать разрешение этому приложению.</string>
+    <string name="shizuku_ready">Всё готово ✓</string>
+    <string name="action_install">Скачать Shizuku</string>
+    <string name="action_open_shizuku">Открыть Shizuku</string>
+    <string name="action_grant">Выдать разрешение</string>
+
+    <string name="current_title">Сейчас</string>
+    <string name="howto_title">Как добавить виджет</string>
+    <string name="howto_text">Удерживайте палец на пустом месте рабочего стола → «Виджеты» → «Сеть 3G/4G».\n\nЕщё можно добавить плитку «Сеть» в шторку быстрых настроек: она переключает 3G ⇄ 4G.\n\nПосле перезагрузки телефона Shizuku нужно запускать заново (откройте Shizuku → «Запустить»).</string>
+</resources>
